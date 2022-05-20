@@ -12,6 +12,24 @@ import MainComp from './components/MainComp.vue';
 
 export default {
   name: 'App',
+
+// Data
+  data() {
+    return {
+      
+    }
+  },
+
+// Metodi
+  methods: {
+    
+  },
+
+// Mounted
+  mounted() {
+    
+  },
+
   components: {
     HeaderComp,
     MainComp
