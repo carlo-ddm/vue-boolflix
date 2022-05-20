@@ -6,7 +6,10 @@
 </template>
 
 <script>
-// import axios from 'axios';
+// importo axios
+import axios from 'axios';
+
+// importo componenti
 import HeaderComp from './components/HeaderComp.vue';
 import MainComp from './components/MainComp.vue';
 
@@ -17,18 +20,30 @@ export default {
 // Data
   data() {
     return {
-      
+      call:'https://api.themoviedb.org/3/search/movie?api_key=c6ddb2547d3e67a073e9212d12070041&language=it-IT&query=Harry Potter',
+      callParams: {
+        api_key: 'c6ddb2547d3e67a073e9212d12070041',
+        language: 'it-IT',
+        query: 'Harry Potter'
+      }
     }
   },
 
 // Metodi
   methods: {
-    
+    getCall(){
+      axios.get(this.call, {
+        params: this.callParams
+      })
+      .then (res => {
+        console.log(res.data);
+      })
+    }
   },
 
 // Mounted
   mounted() {
-    
+    this.getCall()
   },
 
   components: {
