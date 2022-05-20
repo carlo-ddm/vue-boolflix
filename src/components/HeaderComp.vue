@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// importo le mixines
+// importo mixines
 @import '../assets/styles/mixines';
 
 header {

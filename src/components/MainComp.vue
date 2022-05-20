@@ -1,7 +1,9 @@
 <template>
   <main>
-    <MovieScomp />
-    <TvScomp />
+    <div class="container">
+      <MovieScomp />
+      <TvScomp />
+    </div>
   </main>
 </template>
 
@@ -15,9 +17,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// importo mixines
+@import '../assets/styles/mixines';
+
 main {
+  @include d-flex-jcen-ac;
   width: 100%;
   height: 90vh; //debug
-}
 
+  .container {
+    height: 600px; //debug
+    border: 1px solid black; //debug
+  }
+}
 </style>
