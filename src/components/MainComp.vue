@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="container">
-      <MovieScomp />
+      <MovieScomp :arrayMovie="arrayMovie" />
       <TvScomp />
     </div>
   </main>
@@ -12,7 +12,11 @@ import MovieScomp from './sottocomponenti-main/MovieScomp.vue';
 import TvScomp from './sottocomponenti-main/TvScomp.vue';
 export default {
     name: "MainComp",
-    components: { MovieScomp, TvScomp }
+    components: { MovieScomp, TvScomp },
+
+    props: {
+      arrayMovie: Array
+    }
 }
 </script>
 
@@ -23,11 +27,5 @@ export default {
 main {
   @include d-flex-jcen-ac;
   width: 100%;
-  height: 90vh; //debug
-
-  .container {
-    height: 600px; //debug
-    border: 1px solid black; //debug
-  }
 }
 </style>

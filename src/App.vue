@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <HeaderComp />
-    <MainComp />
+    <HeaderComp @search="riceviInput" />
+    <MainComp :arrayMovie="objsCall" />
   </div>
 </template>
 
@@ -20,24 +20,36 @@ export default {
 // Data
   data() {
     return {
-      call:'https://api.themoviedb.org/3/search/movie?api_key=c6ddb2547d3e67a073e9212d12070041&language=it-IT&query=Harry Potter',
+      call:'https://api.themoviedb.org/3/search/movie',
+
+      objsCall : [],
+
+
       callParams: {
         api_key: 'c6ddb2547d3e67a073e9212d12070041',
         language: 'it-IT',
-        query: 'Harry Potter'
+        query: '',
       }
     }
   },
 
 // Metodi
   methods: {
+    // chiamata axios
     getCall(){
       axios.get(this.call, {
         params: this.callParams
       })
       .then (res => {
         console.log(res.data);
+        this.objsCall = res.data.results;
+        console.log('res.data.results SAVED IN objsCall --> ',this.objsCall);
       })
+    },
+
+    riceviInput(text){
+      this.callParams.query = text;
+      this.getCall()
     }
   },
 
