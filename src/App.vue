@@ -2,7 +2,8 @@
   <div id="app">
     <HeaderComp @startSearch="startSearch"/>
     <MainComp titleCards="Film" :items="movie" />
-    <!-- <MainComp titleCards="Serie TV" /> -->
+    <MainComp titleCards="tv" :items="tv" />
+    
   </div>
 </template>
 
@@ -11,6 +12,9 @@ import HeaderComp from './components/HeaderComp.vue';
 import MainComp from './components/MainComp.vue';
 // import axios
 import axios from 'axios';
+
+// import flags
+import 'flag-icons';
 
 export default {
   name: 'App',
@@ -34,6 +38,8 @@ export default {
         query: ''
       },
       movie: [],
+
+      apiUrlTv: 'https://api.themoviedb.org/3/search/tv',
       tv: []
     }
   },
@@ -42,9 +48,14 @@ export default {
   methods: {
     startSearch(titleToSearch){
       this.apiParams.query = titleToSearch;
-      if (titleToSearch.length > 0) this.getApi();
-      else this.movie = []
-      console.log(this.apiParams);
+      if (titleToSearch.length > 0){
+        this.getApi();
+        this.getApiUrlTv();
+      } 
+      else {
+        this.movie = [];
+        this.tv = [];
+      }
     },
 
     // chiamate axios
@@ -55,6 +66,19 @@ export default {
     .then(res => {
       console.log(res.data);
       this.movie = res.data.results
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  },
+
+  getApiUrlTv(){
+    axios.get(this.apiUrlTv, {
+      params: this.apiParams
+    })
+    .then(res => {
+      console.log(res.data);
+      this.tv = res.data.results
     })
     .catch(err => {
       console.log(err);
