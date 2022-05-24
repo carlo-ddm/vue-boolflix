@@ -1,7 +1,9 @@
 <template>
   <main>
     <h1>{{titleCards}}</h1>
-    <CardComp v-for="card in items" :key="card.id" :cardData="card"/>
+    <div class="main-wrapper">
+      <CardComp v-for="card in items" :key="card.id" :cardData="card"/>
+    </div>
   </main>
 </template>
 
@@ -18,5 +20,10 @@ export default {
 </script>
 
 <style lang="scss" scoped >
-
+  .main-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 </style>
