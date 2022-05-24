@@ -2,16 +2,16 @@
   <div class="cdd-card">
       <ul>
         <li>
-          {{movie.title}}
+          {{spettacolo.title}}
         </li>
         <li>
-          {{movie.original_title}}
+          {{spettacolo.original_title}}
         </li>
         <li>
-          {{movie.original_language}}
+          {{spettacolo.original_language}}
         </li>
         <li>
-          {{movie.vote_average}}
+          {{spettacolo.vote_average}}
         </li>
     </ul>
   </div>
@@ -21,7 +21,8 @@
 export default {
   name: 'CardComp',
   props: {
-    movie: Object
+    spettacolo: Object,
+    // tvShows: Object
   }
 }
 </script>

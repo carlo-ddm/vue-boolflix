@@ -1,21 +1,27 @@
 <template>
   <main>
     <div class="container">
-      <MovieScomp :arrayMovie="arrayMovie" />
-      <TvScomp />
+
+    <div>
+      <CardComp v-for="(movie, index) in arrayMovie" :key="`movie_${index}`" :spettacolo="movie"/>
+    </div>
+    <div>
+       <CardComp v-for="(show, index) in arrayTvShows" :key="`show_${index}`" :spettacolo="show" />
+    </div>
+
     </div>
   </main>
 </template>
 
 <script>
-import MovieScomp from './sottocomponenti-main/MovieScomp.vue';
-import TvScomp from './sottocomponenti-main/TvScomp.vue';
+import CardComp from './CardComp.vue';
 export default {
     name: "MainComp",
-    components: { MovieScomp, TvScomp },
+    components: { CardComp },
 
     props: {
-      arrayMovie: Array
+      arrayMovie: Array,
+      arrayTvShows: Array
     }
 }
 </script>

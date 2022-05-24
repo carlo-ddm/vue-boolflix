@@ -19,6 +19,15 @@
       @click="sendEmit">
       btn
       </button>
+
+      <select
+      v-model="inputType"
+      @change="sendEmitType"
+      name="" id="">
+      <option value="">Movies - TV Shows</option>
+      <option value="Movie">Movie</option>
+      <option value="TvShows">TV Shows</option>
+      </select>
       
     </div>
   </header>
@@ -29,7 +38,8 @@ export default {
   name: 'HeaderComp',
   data() {
     return {
-      input: ''
+      input: '',
+      inputType: ''
     }
   },
 
@@ -37,6 +47,10 @@ export default {
     sendEmit(){
       this.$emit('search', this.input);
       this.input = '';
+    },
+
+    sendEmitType(){
+      this.$emit('type', this.inputType)
     }
   },
 
