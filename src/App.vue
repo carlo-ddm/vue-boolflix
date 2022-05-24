@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <HeaderComp />
-    <MainComp />
+    <HeaderComp @startSearch="startSearch"/>
+    <MainComp titleCards="Film" :items="movie" />
+    <!-- <MainComp titleCards="Serie TV" /> -->
   </div>
 </template>
 
@@ -19,7 +20,8 @@ export default {
   },
 
   mounted() {
-    this.getApi()
+    // this.getApi()
+    //Qui chiamata 'i + popolari' (default)
   },
 
   // Data
@@ -29,13 +31,22 @@ export default {
       apiParams: {
         api_key: 'c6ddb2547d3e67a073e9212d12070041',
         language: 'it-IT',
-        query: 'harry potter'
-      }
+        query: ''
+      },
+      movie: [],
+      tv: []
     }
   },
 
   // Metodi
   methods: {
+    startSearch(titleToSearch){
+      this.apiParams.query = titleToSearch;
+      if (titleToSearch.length > 0) this.getApi();
+      else this.movie = []
+      console.log(this.apiParams);
+    },
+
     // chiamate axios
   getApi(){
     axios.get(this.apiUrl, {
@@ -43,6 +54,7 @@ export default {
     })
     .then(res => {
       console.log(res.data);
+      this.movie = res.data.results
     })
     .catch(err => {
       console.log(err);

@@ -1,12 +1,24 @@
 <template>
   <header>
-    Header
+    <input @keyup.enter="startToSearch" v-model.trim="titleToSearch" type="text">
   </header>
 </template>
 
 <script>
 export default {
-  name: 'HeaderComp'
+  name: 'HeaderComp',
+  data() {
+    return {
+      titleToSearch: ''
+    }
+  },
+  methods: {
+    // EMIT non in-line per aggiungere la logica 'reset'
+    startToSearch(){
+      this.$emit('startSearch', this.titleToSearch);
+      this.titleToSearch = ''
+    }
+  },
 }
 </script>
 
