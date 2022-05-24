@@ -1,92 +1,61 @@
 <template>
   <div id="app">
-    <HeaderComp @search="riceviInput" @type="riceviType" />
-    <MainComp :arrayMovie="objsCall" :arrayTvShows="objsCallTvShows" />
+    <HeaderComp />
+    <MainComp />
   </div>
 </template>
 
 <script>
-// importo axios
-import axios from 'axios';
-
-// importo componenti
 import HeaderComp from './components/HeaderComp.vue';
 import MainComp from './components/MainComp.vue';
-
+// import axios
+import axios from 'axios';
 
 export default {
   name: 'App',
+  components: {
+    HeaderComp,
+    MainComp
+  },
+
+  mounted() {
+    this.getApi()
+  },
 
   // Data
   data() {
     return {
-      call:'https://api.themoviedb.org/3/search/movie',
-       callParams: {
+      apiUrl: 'https://api.themoviedb.org/3/search/movie',
+      apiParams: {
         api_key: 'c6ddb2547d3e67a073e9212d12070041',
         language: 'it-IT',
-        query: '',
-      },
-      objsCall : [],
-
-
-      callTvShows: 'https://api.themoviedb.org/3/search/tv',
-     
-      objsCallTvShows: [],
-
-      genereSelezionato: ''
+        query: 'harry potter'
+      }
     }
   },
 
   // Metodi
   methods: {
     // chiamate axios
-
-    // Movies
-    getCall(){
-      axios.get(this.call, {
-        params: this.callParams
-      })
-      .then (res => {
-        this.objsCall = res.data.results;
-        console.log('MOVIES --> ',this.objsCall);
-      })
-    },
-
-    // Tv Shows
-    getCallTvShows(){
-      axios.get(this.callTvShows, {
-      })
-      .then(res => {
-        this.objsCallTvShows = res.data.results;
-        console.log('SERIE TV --> ',this.objsCallTvShows);
-      })
-    },
-
-    riceviInput(text){
-      this.callParams.query = text;
-      this.getCall()
-      this.getCallTvShows()
-    },
-
-    riceviType(genere){
-      this.genereSelezionato = genere;
-      console.log(this.genereSelezionato);
-      if(this.genereSelezionato === 'Movie') this.getCall();
-      else if (this.genereSelezionato === 'TvShows') this.getCallTvShows()
-    },
-  
-
+  getApi(){
+    axios.get(this.apiUrl, {
+      params: this.apiParams
+    })
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
   },
 
-  components: {
-    HeaderComp,
-    MainComp
-  }
+  
 }
 </script>
 
 <style lang="scss">
-// importo Vars e General    Nb. in General c'è Bootstrap
+// importo General    Nb. in General c'è Bootstrap
 @import './assets/styles/general';
 
 </style>
